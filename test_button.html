@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Button Test - NutriVision AI</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; max-width: 800px; margin: 0 auto; }
+        .test-section { margin: 20px 0; padding: 20px; border: 1px solid #ccc; border-radius: 10px; }
+        .btn { padding: 10px 20px; margin: 5px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+        .btn-primary { background: #007bff; color: white; }
+        .btn-secondary { background: #6c757d; color: white; }
+        .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+        .food-tag { background: #28a745; color: white; padding: 5px 10px; margin: 5px; border-radius: 15px; display: inline-block; }
+        .remove-btn { background: none; border: none; color: white; cursor: pointer; margin-left: 10px; }
+        #results { margin-top: 20px; padding: 20px; background: #f8f9fa; border-radius: 10px; display: none; }
+        .nutrition-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 10px; margin: 20px 0; }
+        .nutrition-item { background: #007bff; color: white; padding: 15px; border-radius: 10px; text-align: center; }
+        .suggestions-list { margin: 20px 0; }
+        .suggestion-item { background: #28a745; color: white; padding: 15px; margin: 10px 0; border-radius: 10px; }
+        .console-log { background: #000; color: #0f0; padding: 10px; border-radius: 5px; font-family: monospace; max-height: 300px; overflow-y: auto; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Button Test - NutriVision AI</h1>
+    
+    <div class="test-section">
+        <h2>Manual Food Entry Test</h2>
+        <div>
+            <input type="text" id="foodInput" placeholder="Enter food name (e.g., apple, chicken breast)" style="padding: 10px; width: 300px; margin-right: 10px;">
+            <button class="btn btn-secondary" id="addFoodBtn">
+                <i class="fas fa-plus"></i> Add Food
+            </button>
+        </div>
+        <div id="foodList">
+            <!-- Food items will be added here -->
+        </div>
+        <button class="btn btn-primary" id="analyzeFoodsBtn" disabled>
+            <i class="fas fa-calculator"></i> Analyze Foods
+        </button>
+    </div>
+    
+    <div id="results">
+        <h2>Analysis Results</h2>
+        <div id="nutritionGrid">
+            <!-- Nutrition values will be populated here -->
+        </div>
+        <div id="suggestionsList">
+            <!-- Suggestions will be populated here -->
+        </div>
+    </div>
+    
+    <div class="test-section">
+        <h2>Console Log</h2>
+        <div id="consoleLog" class="console-log">
+            <div>Console output will appear here...</div>
+        </div>
+        <button class="btn btn-secondary" onclick="clearConsole()">
+            Clear Console
+        </button>
+    </div>
+
+    <script src="static/js/app.js"></script>
+    <script>
+        // Console logging function
+        function logToConsole(message) {
+            const consoleLog = document.getElementById('consoleLog');
+            const logEntry = document.createElement('div');
+            logEntry.textContent = `[${new Date().toLocaleTimeString()}] ${message}`;
+            consoleLog.appendChild(logEntry);
+            consoleLog.scrollTop = consoleLog.scrollHeight;
+        }
+        
+        // Override console.log to also show in our console
+        const originalConsoleLog = console.log;
+        console.log = function(...args) {
+            originalConsoleLog.apply(console, args);
+            logToConsole(args.join(' '));
+        };
+        
+        // Override console.error to also show in our console
+        const originalConsoleError = console.error;
+        console.error = function(...args) {
+            originalConsoleError.apply(console, args);
+            logToConsole('❌ ERROR: ' + args.join(' '));
+        };
+        
+        // Clear console function
+        function clearConsole() {
+            document.getElementById('consoleLog').innerHTML = '<div>Console cleared...</div>';
+        }
+        
+        // Test if functions are available globally
+        document.addEventListener('DOMContentLoaded', function() {
+            logToConsole('🧪 Frontend test page loaded');
+            
+            // Test if functions are available globally
+            logToConsole('Global functions test:');
+            logToConsole(`  - analyzeFoods: ${typeof window.analyzeFoods}`);
+            logToConsole(`  - addFood: ${typeof window.addFood}`);
+            logToConsole(`  - removeFood: ${typeof window.removeFood}`);
+            
+            // Test button functionality manually
+            const testBtn = document.getElementById('addFoodBtn');
+            if (testBtn) {
+                testBtn.addEventListener('click', function() {
+                    logToConsole('🎯 Test add food button clicked');
+                    if (typeof addFood === 'function') {
+                        addFood();
+                    } else {
+                        logToConsole('❌ addFood function not available');
+                    }
+                });
+            }
+            
+            const analyzeBtn = document.getElementById('analyzeFoodsBtn');
+            if (analyzeBtn) {
+                analyzeBtn.addEventListener('click', function() {
+                    logToConsole('🎯 Test analyze foods button clicked');
+                    if (typeof analyzeFoods === 'function') {
+                        analyzeFoods();
+                    } else {
+                        logToConsole('❌ analyzeFoods function not available');
+                    }
+                });
+            }
+            
+            // Test DOM elements
+            logToConsole('DOM Elements Check:');
+            logToConsole(`  - Food input: ${document.getElementById('foodInput') ? 'Found' : 'NOT FOUND'}`);
+            logToConsole(`  - Analyze foods button: ${document.getElementById('analyzeFoodsBtn') ? 'Found' : 'NOT FOUND'}`);
+            logToConsole(`  - Food list container: ${document.getElementById('foodList') ? 'Found' : 'NOT FOUND'}`);
+        });
+    </script>
+</body>
+</html>
