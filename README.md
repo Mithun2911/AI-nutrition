@@ -219,22 +219,6 @@ This system is inspired by the research paper "Robust Visual Food Recognition fo
 4. Add tests if applicable
 5. Submit a pull request
 
-## License
-
-This project is licensed under the MIT License - see the LICENSE file for details.
-
-## Citation
-
-If you use this system in your research, please cite:
-
-```bibtex
-@article{nutrition_detection_2024,
-  title={AI-based Nutrition Detection and Diet Suggestion System},
-  author={Your Name},
-  journal={Journal Name},
-  year={2024}
-}
-```
 
 ## Support
 
@@ -243,45 +227,7 @@ For questions and support:
 - Contact the development team
 - Check the documentation for common solutions
 
-## 🚀 Free Deployment (Share with Friends!)
 
-Want to deploy this as a free website to share with friends? We've got you covered!
-
-### Quick Deploy Options:
-
-1. **Render** (Recommended - Easiest)
-   - Free tier: 750 hours/month
-   - Auto-deploy from GitHub
-   - See `DEPLOYMENT_GUIDE.md` for step-by-step instructions
-
-2. **Railway** (Best Free Tier)
-   - $5 credit/month
-   - Great for small apps
-   - Auto-detects Python apps
-
-3. **PythonAnywhere** (Simple)
-   - Free tier available
-   - Easy setup for beginners
-
-4. **Replit** (Easiest for Beginners)
-   - One-click deployment
-   - Share instantly
-
-### Before Deploying:
-
-Run the preparation script:
-```bash
-python prepare_deploy.py
-```
-
-This will check all required files and prepare your project for deployment.
-
-### Deployment Files:
-
-- `requirements_deploy.txt` - Lightweight dependencies (no heavy ML libs)
-- `Procfile` - For Render/Railway deployment
-- `runtime.txt` - Python version specification
-- `.gitignore` - Git ignore rules
 
 ### Full Guide:
 
@@ -297,5 +243,6 @@ See **[DEPLOYMENT_GUIDE.md](DEPLOYMENT_GUIDE.md)** for detailed instructions on 
 - Advanced dietary restrictions handling
 - Integration with wearable devices
 - Community-driven food database
+
 
 
